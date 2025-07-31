@@ -1,3 +1,7 @@
 node_modules
 DONTREADME.MD
-.ENV
+coverage
+.env
+.nyc*
+tests/unit/mocks/**
+tests/integration/mocks/**

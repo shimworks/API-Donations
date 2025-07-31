@@ -1,8 +1,16 @@
 {
   "name": "api-donations",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo",
+    "du": "docker-compose up -d",
+    "dd": "docker-compose down",
+    "apibash":"docker exec -it donations_api bash",
+    "dbbash":"docker exec -it donations_db bash",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
