@@ -17,7 +17,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_HOST: database
+      MYSQL_HOST: donations_db
       MYSQL_PORT: ${MYSQL_PORT}
       NODE_ENV: ${NODE_ENV}
   database:

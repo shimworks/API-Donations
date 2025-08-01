@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
+    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
+    "drop": "npx sequelize-cli db:drop",
+    "seed": "npx sequelize-cli db:seed:all",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "du": "docker-compose up -d",
