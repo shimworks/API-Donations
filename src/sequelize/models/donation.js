@@ -1,23 +1,14 @@
-'use strict';
-const { Model } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
-  class Donation extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  Donation.init({
+  const Donation = sequelize.define('Donation', {
     value: DataTypes.INTEGER,
     createdAt: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Donation',
+  },
+  {
+    createdAt: 'DonatedAt',
   });
+  Donation.associate = (models) => {
+    Donation.belongsTo(models.Donor,
+      { foreingKey: 'donorId', as: 'donor' });
+    };
   return Donation;
 };
