@@ -8,6 +8,7 @@ const Donor = sequelize.define('Donor', {
   },
   {
     timestamps: true,
+    indexes: [{ unique: true, fields: ['email']}]
   });
   return Donor;
 };

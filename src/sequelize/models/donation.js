@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: DataTypes.DATE
   },
   {
-    createdAt: 'DonatedAt',
+    createdAt: 'donatedAt',
   });
   Donation.associate = (models) => {
     Donation.belongsTo(models.Donor,

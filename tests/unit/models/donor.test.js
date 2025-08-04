@@ -1,37 +1,41 @@
 const { expect } = require('chai')
-const { spy } = require('sinon')
-const proxyquire = require('proxyquire')
-const { sequelize, Sequelize } = require('sequelize-test-helpers')
 
+const {
+  sequelize,
+  dataTypes,
+  checkModelName,
+  checkUniqueIndex,
+  checkPropertyExists,
+  checkNonUniqueIndex
+} = require('sequelize-test-helpers')
 
-describe('src/models/Donor', () => {
-  const { DataTypes } = Sequelize
+const DonorModel = require('../../../src/sequelize/models/donor')
 
-  const DonorFactory = proxyquire('../../../src/sequelize/models/donor.js', {
-    sequelize: Sequelize
+describe('### Unit Donor Model', () => {
+  const Donor = DonorModel(sequelize, dataTypes)
+  const donor = new Donor()
+
+  checkModelName(Donor)('Donor')
+
+  context('properties', () => {
+    ;['fullName', 'email', 'password', 'phone', 'donatedValue'].forEach(checkPropertyExists(donor))
   })
 
-  let Donor
+  // context('associations', () => {
+  //   const Company = 'some dummy company'
 
-  before(() => {
-    Donor = DonorFactory(sequelize, DataTypes)
-  })
+  //   before(() => {
+  //     Donor.associate({ Company })
+  //   })
 
-  // It's important you do this
-  after(() => {
-    Donor.init.resetHistory()
-  })
+  //   it('defined a belongsTo association with Company', () => {
+  //     expect(Donor.belongsTo).to.have.been.calledWith(Company)
+  //   })
+  // })
 
-  it('called Donor.init with the correct parameters', () => {
-    expect(Donor.init).to.have.been.equal(
-      {
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING
-      },
-      {
-        sequelize,
-        modelName: 'Donor'
-      }
-    )
+  context('indexes', () => {
+    context('unique', () => {
+      ['email'].forEach(checkUniqueIndex(donor))
+    })
   })
 })
