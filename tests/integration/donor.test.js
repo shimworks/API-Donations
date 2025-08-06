@@ -41,13 +41,14 @@ const donorList = [
   }
 ]
 
-describe('Testando os endpoints de people', function () {
-  this.timeout(5000);
+describe('Testing Donor endpoints', function () {
 
-  before((done) => {
+  before(function (done) {
+    this.timeout(0);
     shell.exec('npx sequelize-cli db:drop');
     shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate');
     done();
+
   })
   it('should create a new donor', (done) => {
     chai.request(app)
@@ -63,6 +64,24 @@ describe('Testando os endpoints de people', function () {
       .end((err, res) => {
         expect(res.status).to.equal(201);
         expect(res.body).to.deep.equal({ message: 'Donor successfully created' });
+        done();
+      });
+  });
+
+  it('should not create a donor with an existing email', (done) => {
+    chai.request(app)
+      .post('/donor')
+      .send(
+        {
+          fullName: 'Jane Doe',
+          email: 'jane.doestub@email.com',
+          phone: '089 908 321',
+          password: 'seenhaJane',
+        }
+      )
+      .end((err, res) => {
+        expect(res.status).to.equal(409);
+        expect(res.body).to.deep.equal({ message: 'Email already exists' });
         done();
       });
   });
