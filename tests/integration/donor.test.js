@@ -52,7 +52,7 @@ describe('Testing Donor endpoints', function () {
   })
   it('should create a new donor', (done) => {
     chai.request(app)
-      .post('/donor')
+      .post('/signup')
       .send(
         {
           fullName: 'Jane Doe',
@@ -70,7 +70,7 @@ describe('Testing Donor endpoints', function () {
 
   it('should not create a donor with an existing email', (done) => {
     chai.request(app)
-      .post('/donor')
+      .post('/signup')
       .send(
         {
           fullName: 'Jane Doe',
@@ -86,6 +86,53 @@ describe('Testing Donor endpoints', function () {
       });
   });
 
+  it('should login successfully', (done) => {
+    chai.request(app)
+      .post('/login')
+      .send(
+        {
+          email: 'jane.doestub@email.com',
+          password: 'seenhaJane',
+        }
+      )
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.token).to.not.be.null();
+        done();
+      });
+  });
+
+  it('should return password error', (done) => {
+    chai.request(app)
+      .post('/login')
+      .send(
+        {
+          email: 'jane.doestub@email.com',
+          password: 'asdddd',
+        }
+      )
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal({ message: 'Password is incorrect' });
+        done();
+      });
+  });
+
+  it('should return donor not found', (done) => {
+    chai.request(app)
+      .post('/login')
+      .send(
+        {
+          email: 'jane.dontexists@email.com',
+          password: 'seenhaJane',
+        }
+      )
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body).to.be.deep.equal({ message: 'Donor not found' });
+        done();
+      });
+  });
   // it('Testando a listagem de todas as pessoas', async function () {
   //   sinon.stub(connection, 'execute').resolves([donorList]);
   //   const response = await chai

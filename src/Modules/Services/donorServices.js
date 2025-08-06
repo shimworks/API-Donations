@@ -1,9 +1,13 @@
 const { createDonor, getByEmail } = require("../Model/donorModel");
+const { hashPassword } = require("./auth");
 
 const newDonor = async (donorData) => {
-  const emailCheck = await checkDuplicateEmail(donorData);
+  let donor = donorData
+  const emailCheck = await checkDuplicateEmail(donor);
+  const hashedPassword = await hashPassword(donor.password);
+  donor.password = hashedPassword;
   if (!emailCheck) {
-    await createDonor(donorData);
+    await createDonor(donor);
     return {status: 201, message: `Donor successfully created`};
   } else {
     return emailCheck;
