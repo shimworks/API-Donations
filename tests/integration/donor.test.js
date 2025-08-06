@@ -97,7 +97,7 @@ describe('Testing Donor endpoints', function () {
       )
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.token).to.not.be.null();
+        expect(res.body.token).to.not.be.null;
         done();
       });
   });
@@ -112,7 +112,7 @@ describe('Testing Donor endpoints', function () {
         }
       )
       .end((err, res) => {
-        expect(res.status).to.equal(400);
+        expect(res.status).to.equal(401);
         expect(res.body).to.be.deep.equal({ message: 'Password is incorrect' });
         done();
       });
