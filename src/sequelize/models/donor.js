@@ -4,7 +4,6 @@ const Donor = sequelize.define('Donor', {
     email: DataTypes.STRING,
     phone: DataTypes.STRING,
     password: DataTypes.STRING,
-    donatedValue: DataTypes.INTEGER
   },
   {
     timestamps: true,

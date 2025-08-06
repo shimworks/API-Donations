@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+const { expect } = require('chai');
 
 const {
   sequelize,
@@ -6,20 +6,20 @@ const {
   checkModelName,
   checkUniqueIndex,
   checkPropertyExists,
-  checkNonUniqueIndex
-} = require('sequelize-test-helpers')
+  checkNonUniqueIndex,
+} = require('sequelize-test-helpers');
 
-const DonorModel = require('../../../src/sequelize/models/donor')
+const DonorModel = require('../../../src/sequelize/models/donor');
 
 describe('### Unit Donor Model', () => {
-  const Donor = DonorModel(sequelize, dataTypes)
-  const donor = new Donor()
+  const Donor = DonorModel(sequelize, dataTypes);
+  const donor = new Donor();
 
-  checkModelName(Donor)('Donor')
+  checkModelName(Donor)('Donor');
 
   context('properties', () => {
-    ;['fullName', 'email', 'password', 'phone', 'donatedValue'].forEach(checkPropertyExists(donor))
-  })
+    ['fullName', 'email', 'password', 'phone'].forEach(checkPropertyExists(donor));
+  });
 
   // context('associations', () => {
   //   const Company = 'some dummy company'
@@ -35,7 +35,7 @@ describe('### Unit Donor Model', () => {
 
   context('indexes', () => {
     context('unique', () => {
-      ['email'].forEach(checkUniqueIndex(donor))
-    })
-  })
-})
+      ['email'].forEach(checkUniqueIndex(donor));
+    });
+  });
+});

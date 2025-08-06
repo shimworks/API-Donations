@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 
-// const donorsRoutes = require('./Modules/routes/donorsRoutes');
+const donorsRoutes = require("./Modules/routes/donorsRoutes");
 
 const app = express();
 
 app.use(express.json());
 
-// app.use('/donors', donorsRoutes);
+app.use("/", donorsRoutes);
 
 module.exports = app;

@@ -1,0 +1,80 @@
+const sinon = require("sinon")
+const chaiHttp = require("chai-http")
+const chai = require("chai")
+// const { Donor } = require("../../src/Modules/Models/Donor")
+// const {
+//   createDonor,
+//   getDonorById,
+//   updateDonor,
+//   deleteDonor
+// } = require("../../src/services/donorService")
+
+const app = require("../../src/app")
+const server = require("../../src/server")
+const { expect, use } = chai
+use(chaiHttp)
+
+const shell = require('shelljs');
+
+
+const donorList = [
+  {
+    id: 1,
+    fullName: 'Jane Doe',
+    email: 'jane.doe@email.com',
+    phone: '089 908 321',
+    password: 'seenhaJane',
+  },
+  {
+    id: 2,
+    fullName: 'Kan Lakam',
+    email: 'kan.lakam@email.com',
+    phone: '789 456 123',
+    password: 'seenhaKan',
+  },
+  {
+    id: 3,
+    fullName: 'Jhon Wick',
+    email: 'jhon.wick@email.com',
+    phone: '456 789 123',
+    password: 'senhajhon',
+  }
+]
+
+describe('Testando os endpoints de people', function () {
+  this.timeout(5000);
+
+  before((done) => {
+    shell.exec('npx sequelize-cli db:drop');
+    shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate');
+    done();
+  })
+  it('should create a new donor', (done) => {
+    chai.request(app)
+      .post('/donor')
+      .send(
+        {
+          fullName: 'Jane Doe',
+          email: 'jane.doestub@email.com',
+          phone: '089 908 321',
+          password: 'seenhaJane',
+        }
+      )
+      .end((err, res) => {
+        expect(res.status).to.equal(201);
+        expect(res.body).to.deep.equal({ message: 'Donor successfully created' });
+        done();
+      });
+  });
+
+  // it('Testando a listagem de todas as pessoas', async function () {
+  //   sinon.stub(connection, 'execute').resolves([donorList]);
+  //   const response = await chai
+  //     .request(app)
+  //     .get('/donor');
+
+  //   expect(response.status).to.equal(200);
+  //   expect(response.body).to.deep.equal(donorList);
+  // });
+
+})

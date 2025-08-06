@@ -1,3 +1,4 @@
+'use strict'
 const {
   sequelize,
   dataTypes,
@@ -7,7 +8,6 @@ const {
   checkNonUniqueIndex,
 } = require('sequelize-test-helpers')
 const chai = require('chai')
-const sinon = require('sinon')
 chai.should()
 chai.use(require('sinon-chai'))
 const expect = chai.expect
@@ -35,7 +35,7 @@ describe('### Unit Donation Model', () => {
     }
 
     before(() => {
-      Donation.associate( {Donor} )
+      Donation.associate({ Donor })
     })
 
     it('defined a belongsTo association with Donor', () => {

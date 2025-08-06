@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
-    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "drop": "npx sequelize-cli db:drop",
@@ -14,13 +14,16 @@
     "dd": "docker-compose down",
     "apibash": "docker exec -it donations_api bash",
     "dbbash": "docker exec -it donations_db bash",
-    "test": "mocha tests/**/*$NAME*.test.js --exit"
+    "test": "mocha tests/**/*$NAME*.test.js --exit",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "debug": "node --inspect-brk src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "camelize": "^1.0.1",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
@@ -31,13 +34,17 @@
     "snakeize": "^0.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.32.0",
     "chai": "4.3.4",
     "chai-http": "4.3.0",
     "docker-compose": "^1.2.0",
+    "eslint": "^9.32.0",
+    "globals": "^16.3.0",
     "mocha": "10.0.0",
     "nodemon": "^3.1.10",
     "sequelize-cli": "6.6.3",
     "sequelize-test-helpers": "1.4.3",
+    "shelljs": "^0.10.0",
     "sinon": "14.0.0",
     "sinon-chai": "^3.7.0"
   }

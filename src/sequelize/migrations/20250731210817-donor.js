@@ -1,7 +1,7 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     return queryInterface.createTable('Donors', {
       id: {
         type: Sequelize.INTEGER,
@@ -25,14 +25,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      donatedValue: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       }
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     queryInterface.dropTable('Donors');
   }
 };
