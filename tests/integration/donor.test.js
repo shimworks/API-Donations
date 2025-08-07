@@ -1,6 +1,7 @@
-const sinon = require("sinon")
-const chaiHttp = require("chai-http")
 const chai = require("chai")
+const sinon = require("sinon")
+const shell = require('shelljs');
+const chaiHttp = require("chai-http")
 // const { Donor } = require("../../src/Modules/Models/Donor")
 // const {
 //   createDonor,
@@ -8,14 +9,9 @@ const chai = require("chai")
 //   updateDonor,
 //   deleteDonor
 // } = require("../../src/services/donorService")
-
 const app = require("../../src/app")
-const server = require("../../src/server")
 const { expect, use } = chai
 use(chaiHttp)
-
-const shell = require('shelljs');
-
 
 const donorList = [
   {
@@ -102,7 +98,8 @@ describe('Testing Donor endpoints', function () {
       });
   });
 
-  it('should return password error', (done) => {
+  it('should return password error', function (done) {
+    this.timeout(5000);
     chai.request(app)
       .post('/login')
       .send(

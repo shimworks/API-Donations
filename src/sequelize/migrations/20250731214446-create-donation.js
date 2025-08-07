@@ -16,7 +16,8 @@ module.exports = {
       createdAt: {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'donatedAt'
       },
       updatedAt: {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),

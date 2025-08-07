@@ -7,7 +7,8 @@ module.exports = {
       [{
           id: 1,
           value: 3800,
-          donorId: 1
+          donorId: 1,
+          donatedAt: new Date(2025, 8, 1, 12, 30, 0)
         },
         {
           id: 2,
