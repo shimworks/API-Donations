@@ -23,7 +23,7 @@ const checkLogin = async ({password, email}) => {
   if (!isPasswordValid) {
     return {status: 401, message: {message: 'Password is incorrect'}};
   } else {
-    const token = generateToken({ id: donor.id, email: donor.email });
+    const token = await generateToken({ id: donor.id, email: donor.email });
     return {status: 200, message: {token}};
   }
 }

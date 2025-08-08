@@ -21,7 +21,7 @@ describe('### Unit Donation Model', () => {
   checkModelName(Donation)('Donation')
 
   context('properties', () => {
-    ;['value', 'createdAt'].forEach(checkPropertyExists(donation))
+    ;['value', 'donatedAt'].forEach(checkPropertyExists(donation))
   })
 
   context('associations', () => {

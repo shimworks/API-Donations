@@ -1,3 +1,5 @@
+const { create } = require('domain');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,6 +10,8 @@ module.exports = {
           email: 'jane.doe@email.com',
           phone: '089 908 321',
           password: 'seenhaJane',
+          createdAt: new Date('2011-08-01T19:58:00.000Z'),
+          updatedAt: new Date('2011-08-01T19:58:51.000Z')
         },
         {
           id: 2,
@@ -15,6 +19,8 @@ module.exports = {
           email: 'kan.lakam@email.com',
           phone: '789 456 123',
           password: 'seenhaKan',
+          createdAt: new Date('2011-08-01T19:58:00.000Z'),
+          updatedAt: new Date('2011-08-01T19:58:51.000Z')
         },
         {
           id: 3,
@@ -22,6 +28,8 @@ module.exports = {
           email: 'jhon.wick@email.com',
           phone: '456 789 123',
           password: 'senhajhon',
+          createdAt: new Date('2011-08-01T19:58:00.000Z'),
+          updatedAt: new Date('2011-08-01T19:58:51.000Z')
         }]);
   },
 

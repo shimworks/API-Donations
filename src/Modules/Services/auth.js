@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = process.env.SALT || 10;
-const secret = process.env.SECRET_KEY || 'ZAKEY'
+const secret = process.env.SECRET
 
 const jwtConfig = {
   expiresIn: '7d',
@@ -24,4 +24,14 @@ function generateToken(payload) {
   return token;
 }
 
-module.exports = { hashPassword, checkPassword, generateToken };
+function decodeToken(auth) {
+  const token = auth.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, secret);
+    return decoded;
+  } catch (error) {
+    return null;
+  }
+}
+
+module.exports = { hashPassword, checkPassword, generateToken, decodeToken };

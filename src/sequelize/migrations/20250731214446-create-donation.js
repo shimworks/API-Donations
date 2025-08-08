@@ -14,13 +14,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       createdAt: {
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.NOW,
         allowNull: false,
         type: Sequelize.DATE,
         field: 'donatedAt'
       },
       updatedAt: {
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.NOW,
         allowNull: false,
         type: Sequelize.DATE
       },

@@ -4,6 +4,7 @@
   "main": "src/server.js",
   "scripts": {
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
+    "reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "drop": "npx sequelize-cli db:drop",

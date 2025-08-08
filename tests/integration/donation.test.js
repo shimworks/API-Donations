@@ -2,6 +2,7 @@ const chai = require("chai")
 const sinon = require("sinon")
 const shell = require('shelljs');
 const chaiHttp = require("chai-http")
+require('dotenv').config({ path: '.env' });
 // const { Donor } = require("../../src/Modules/Models/Donor")
 // const {
 //   createDonor,
@@ -15,6 +16,7 @@ const { expect, use } = chai
 use(chaiHttp)
 
 const Token = `Bearer ${generateToken({ id: 1, email: 'jane.doe@email.com' })}`
+// const Token = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqYW5lLmRvZXN0dWJAZW1haWwuY29tIiwiaWF0IjoxNzU0NTk4MjE1LCJleHAiOjE3NTUyMDMwMTV9.nW_iOvISnt66eoBvjrPgKPc4jP3y2FOFzHHfsGF59vM`
 const donationList = [
   {
     id: 1,
@@ -23,7 +25,7 @@ const donationList = [
   },
   {
     id: 2,
-    amount: 100,
+    value: 100,
     donatedAt: new Date(2025, 8, 7, 10, 30, 0),
   }
 ]
@@ -44,13 +46,30 @@ describe('Testing Donation endpoints', function () {
       .set('Authorization', Token)
       .send(
         {
-          amount: 100,
-          createdAt: new Date(2025, 8, 7, 10, 30, 0)
+          value: 100,
+          donatedAt: new Date(2025, 8, 7, 10, 30, 0)
         }
       )
       .end((err, res) => {
         expect(res).to.have.status(201);
-        expect(res.body).to.have.property('message').equal('Successfully donated');
+        expect(res.body).to.deep.equal({ message:'Successfully donated, the donation Id is 4'});
+        done();
+      });
+  })
+
+  it('should return BadRequest donation', (done) => {
+    chai.request(app)
+      .post('/donation')
+      .set('Authorization', Token)
+      .send(
+        {
+          value: "asdasd",
+          donatedAt: new Date(2025, 8, 7, 10, 30, 0),
+        }
+      )
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body).to.deep.equal({ message:'Error creating donation' });
         done();
       });
   })
@@ -61,12 +80,12 @@ describe('Testing Donation endpoints', function () {
       .set('Authorization', `Bearer invalidtoken`)
       .send(
         {
-          amount: 100,
+          value: 100,
         }
       )
       .end((err, res) => {
         expect(res).to.have.status(401);
-        expect(res.body).to.have.property('message').equal('Login required');
+        expect(res.body).to.deep.equal({ message:'Login required' });
         done();
       });
   })
@@ -77,7 +96,7 @@ describe('Testing Donation endpoints', function () {
       .set('Authorization', Token)
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body).to.have.property('data').deep.equal(donationList);
+        expect(res.body).to.deep.equal({ data: donationList });
         done();
       });
   })
@@ -88,7 +107,7 @@ describe('Testing Donation endpoints', function () {
       .set('Authorization', 'Bearer invalidtoken')
       .end((err, res) => {
         expect(res).to.have.status(401);
-        expect(res.body).to.have.property('message').equal('Login required');
+        expect(res.body).to.deep.equal({ message:'Login required'});
         done();
       });
   })
@@ -97,7 +116,7 @@ describe('Testing Donation endpoints', function () {
       .put('/donation/2')
       .set('Authorization', Token)
       .send({
-        amount: 200,
+        value: 200,
       })
       .end((err, res) => {
         expect(res).to.have.status(204);
@@ -111,11 +130,11 @@ describe('Testing Donation endpoints', function () {
       .put('/donation/2')
       .set('Authorization', 'Bearer invalidtoken')
       .send({
-        amount: 200,
+        value: 200,
       })
       .end((err, res) => {
         expect(res).to.have.status(401);
-        expect(res.body).to.have.property('message').equal('Login required');
+        expect(res.body).to.deep.equal({ message: 'Login required' });
         done();
       });
   })
@@ -137,7 +156,7 @@ describe('Testing Donation endpoints', function () {
       .set('Authorization', 'Bearer invalidtoken')
       .end((err, res) => {
         expect(res).to.have.status(401);
-        expect(res.body).to.have.property('message').equal('Login required');
+        expect(res.body).to.deep.equal({ message: 'Login required' });
         done();
       });
   })

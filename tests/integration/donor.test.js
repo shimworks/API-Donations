@@ -2,6 +2,7 @@ const chai = require("chai")
 const sinon = require("sinon")
 const shell = require('shelljs');
 const chaiHttp = require("chai-http")
+require('dotenv').config({ path: '.env' });
 // const { Donor } = require("../../src/Modules/Models/Donor")
 // const {
 //   createDonor,
@@ -88,7 +89,7 @@ describe('Testing Donor endpoints', function () {
       .send(
         {
           email: 'jane.doestub@email.com',
-          password: 'seenhaJane',
+          password: 'seenhaJane'
         }
       )
       .end((err, res) => {
@@ -105,7 +106,7 @@ describe('Testing Donor endpoints', function () {
       .send(
         {
           email: 'jane.doestub@email.com',
-          password: 'asdddd',
+          password: 'asdddd'
         }
       )
       .end((err, res) => {
