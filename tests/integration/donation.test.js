@@ -173,7 +173,7 @@ describe('Testing Donation endpoints', function () {
 
   it('should return No Content when deleting donations', (done) => {
     chai.request(app)
-      .delete('/donation/2')
+      .delete('/donation/1')
       .set('Authorization', Token)
       .end((err, res) => {
         expect(res).to.have.status(204);
@@ -189,6 +189,17 @@ describe('Testing Donation endpoints', function () {
       .end((err, res) => {
         expect(res).to.have.status(401);
         expect(res.body).to.deep.equal({ message: 'Login required' });
+        done();
+      });
+  })
+
+  it('should return Forbidden when deleting donations from other donors', (done) => {
+    chai.request(app)
+      .delete('/donation/2')
+      .set('Authorization', Token)
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        expect(res.body).to.deep.equal({ message: "Can't delete other donors donations or donation not found" });
         done();
       });
   })

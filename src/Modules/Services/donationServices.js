@@ -32,8 +32,18 @@ const updateDonationValue = async (data, donationId, donor) => {
   return { status: 400, message: 'Verify if value is integer' };
 }
 
+const deleteDonorDonation = async (donationId, donor) => {
+  const deleted = await deleteDonationWithId(donationId, donor.id);
+  if (deleted == 1) {
+    return { status: 204, message: 'No Content' };
+  } else {
+    return { status: 403, message: "Can't delete other donors donations or donation not found" };
+  }
+}
+
 module.exports = {
   newDonation,
   getDonationsByDonor,
   updateDonationValue,
+  deleteDonorDonation
 }

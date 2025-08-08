@@ -3,7 +3,7 @@ const { newDonor, checkLogin } = require("../Services/donorServices");
 const createDonor = async (req, res) => {
   const data = req.body;
   const result = await newDonor(data);
-  return res.status(result.status).json({ message: result.message });  
+  return res.status(result.status).json({ message: result.message });
 }
 
 const loginDonor = async (req, res) => {

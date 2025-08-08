@@ -12,17 +12,17 @@ const getAllDonationsByDonorId = async (donorId) => {
 
 const updateDonationWithId = async (data, id, donorId) => {
   try {
-    const res = await Donation.update({value: data.value},{ where: { id, donorId } });
+    const res = await Donation.update({ value: data.value }, { where: { id, donorId } });
     return res;
   } catch (err) {
     return false;
   }
 };
 
-const deleteDonationWithId = async (id) => {
+const deleteDonationWithId = async (id, donorId) => {
   try {
-    await Donation.destroy({ where: { id } });
-    return true;
+    const res = await Donation.destroy({ where: { id, donorId } });
+    return res;
   } catch (err) {
     return false;
   }
