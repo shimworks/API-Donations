@@ -1,4 +1,4 @@
-const { newDonation, getDonationsByDonor  } = require("../Services/donationServices");
+const { newDonation, getDonationsByDonor, updateDonationValue  } = require("../Services/donationServices");
 
 const createDonation = async (req, res) => {
   const data = req.body;
@@ -18,8 +18,10 @@ const getDonations = async (req, res) => {
 
 const updateDonation = async (req, res) => {
   const data = req.body;
-  const result = await checkLogin(data);
-  return res.status(result.status).json(result.message);
+  const donor = req.user;
+  const donationId = req.params.id;
+  const result = await updateDonationValue(data, donationId, donor);
+  return res.status(result.status).json({ message: result.message });
 }
 
 const deleteDonation = async (req, res) => {

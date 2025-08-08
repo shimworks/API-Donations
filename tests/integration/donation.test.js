@@ -117,7 +117,7 @@ describe('Testing Donation endpoints', function () {
   })
   it('should return No Content when updating donations', (done) => {
     chai.request(app)
-      .put('/donation/2')
+      .put('/donation/1')
       .set('Authorization', Token)
       .send({
         value: 200,
@@ -131,7 +131,7 @@ describe('Testing Donation endpoints', function () {
 
   it('should return Unauthorized when updating donations', (done) => {
     chai.request(app)
-      .put('/donation/2')
+      .put('/donation/1')
       .set('Authorization', 'Bearer invalidtoken')
       .send({
         value: 200,
@@ -139,6 +139,34 @@ describe('Testing Donation endpoints', function () {
       .end((err, res) => {
         expect(res).to.have.status(401);
         expect(res.body).to.deep.equal({ message: 'Login required' });
+        done();
+      });
+  })
+
+  it('should return Forbidden when updating donations from other donors', (done) => {
+    chai.request(app)
+      .put('/donation/2')
+      .set('Authorization', Token)
+      .send({
+        value: 200,
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        expect(res.body).to.deep.equal({ message: "Can't update other donors donations" });
+        done();
+      });
+  })
+
+  it('should return BadRequest when updating donations from other donors', (done) => {
+    chai.request(app)
+      .put('/donation/1')
+      .set('Authorization', Token)
+      .send({
+        value: "notAValue",
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body).to.deep.equal({ message: 'Verify if value is integer' });
         done();
       });
   })

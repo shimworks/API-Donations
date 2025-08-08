@@ -10,10 +10,10 @@ const getAllDonationsByDonorId = async (donorId) => {
   return find;
 }
 
-const updateDonationWithId = async (data, id) => {
+const updateDonationWithId = async (data, id, donorId) => {
   try {
-    await Donation.update({value: data},{ where: { id } });
-    return true;
+    const res = await Donation.update({value: data.value},{ where: { id, donorId } });
+    return res;
   } catch (err) {
     return false;
   }
