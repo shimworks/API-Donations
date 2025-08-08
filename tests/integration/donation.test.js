@@ -11,7 +11,7 @@ require('dotenv').config({ path: '.env' });
 //   deleteDonor
 // } = require("../../src/services/donorService")
 const { generateToken } = require("../../src/Modules/Services/auth");
-const app = require("../../src/app")
+const app = require("../../src/app");
 const { expect, use } = chai
 use(chaiHttp)
 
@@ -21,13 +21,10 @@ const donationList = [
   {
     id: 1,
     value: 3800,
-    donatedAt: new Date(2025, 8, 1, 12, 30, 0)
+    donatedAt: "2025-09-01T12:30:00.000Z",
+    updatedAt: "2025-09-01T12:30:00.000Z",
+    donorId: 1
   },
-  {
-    id: 2,
-    value: 100,
-    donatedAt: new Date(2025, 8, 7, 10, 30, 0),
-  }
 ]
 
 describe('Testing Donation endpoints', function () {
@@ -39,6 +36,23 @@ describe('Testing Donation endpoints', function () {
     shell.exec('npx sequelize-cli db:seed:all');
     done();
   })
+  // after(function (done) {
+  //   this.timeout(0);
+  //   shell.exec('npx sequelize-cli db:seed:undo --seed 20250801130424-Donations.js');
+  //   shell.exec('npx sequelize-cli db:seed --seed 20250801130424-Donations.js');
+  //   done();
+  // })
+
+  it('should return only donations from the logged donor', (done) => {
+    chai.request(app)
+      .get('/donation')
+      .set('Authorization', Token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.deep.equal({ data: donationList });
+        done();
+      });
+  })
 
   it('should create a new donation', (done) => {
     chai.request(app)
@@ -47,12 +61,13 @@ describe('Testing Donation endpoints', function () {
       .send(
         {
           value: 100,
-          donatedAt: new Date(2025, 8, 7, 10, 30, 0)
+          donatedAt: new Date("2025-09-07T10:30:00.000Z"),
+          updatedAt: new Date("2025-09-07T10:30:00.000Z")
         }
       )
       .end((err, res) => {
         expect(res).to.have.status(201);
-        expect(res.body).to.deep.equal({ message:'Successfully donated, the donation Id is 4'});
+        expect(res.body).to.deep.equal({ message: 'Successfully donated, the donation Id is 4' });
         done();
       });
   })
@@ -69,7 +84,7 @@ describe('Testing Donation endpoints', function () {
       )
       .end((err, res) => {
         expect(res).to.have.status(400);
-        expect(res.body).to.deep.equal({ message:'Error creating donation' });
+        expect(res.body).to.deep.equal({ message: 'Error creating donation' });
         done();
       });
   })
@@ -85,18 +100,7 @@ describe('Testing Donation endpoints', function () {
       )
       .end((err, res) => {
         expect(res).to.have.status(401);
-        expect(res.body).to.deep.equal({ message:'Login required' });
-        done();
-      });
-  })
-
-  it('should return only donations from the logged donor', (done) => {
-    chai.request(app)
-      .get('/donation')
-      .set('Authorization', Token)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.deep.equal({ data: donationList });
+        expect(res.body).to.deep.equal({ message: 'Login required' });
         done();
       });
   })
@@ -107,7 +111,7 @@ describe('Testing Donation endpoints', function () {
       .set('Authorization', 'Bearer invalidtoken')
       .end((err, res) => {
         expect(res).to.have.status(401);
-        expect(res.body).to.deep.equal({ message:'Login required'});
+        expect(res.body).to.deep.equal({ message: 'Login required' });
         done();
       });
   })
