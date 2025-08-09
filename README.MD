@@ -110,14 +110,14 @@ localhost:3001/donation // precisa utilizar o Token para fazer esta reequisiçã
 ![creatingDonation](/Global/Pics/03_2-postDonation.png)
 
 GET - Ver doação
-```
-localhost:3001/donation // precisa utilizar o Token para fazer esta reequisição
+```js
+localhost:3001/donation // precisa utilizar o Token para fazer esta requisição
 ```
 ![getDonation](/Global/Pics/04-getDonation.png)
 
 PUT - Atualizar Doação
-```
-localhost:3001/donation/1 // precisa utilizar o Token para fazer esta reequisição
+```js
+localhost:3001/donation/1 // precisa utilizar o Token para fazer esta requisição
 ```
 ```json
 {
@@ -127,8 +127,8 @@ localhost:3001/donation/1 // precisa utilizar o Token para fazer esta reequisiç
 ![putDonation](/Global/Pics/05-putDonation.png)
 
 DELETE - Deletar Doação
-```
- localhost:3001/donation/1 // precisa utilizar o Token para fazer esta reequisição
+```js
+ localhost:3001/donation/1 // precisa utilizar o Token para fazer esta requisição
 ```
 ![deleteDonation](/Global/Pics/06-deleteDonation.png)
 
