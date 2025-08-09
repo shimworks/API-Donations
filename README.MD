@@ -98,8 +98,8 @@ localhost:3001/login
 ![login](/Global/Pics/02-login.png)
 
 POST - Criar doação
-```
-localhost:3001/donation // precisa utilizar o Token para fazer esta reequisição
+```js
+localhost:3001/donation // precisa utilizar o Token para fazer esta requisição
 ```
 ```json
 {
