@@ -169,6 +169,6 @@ DELETE - Deletar Doação
 [ ] Adicionar endopints para ADMIN (Gerenciar Doadores, Doações e ADMIN)  
 
 ### Minha Visão 
-Em relação aos Proximos passos, com excessão da implementação do Swagger, constrí esse projeto habilitando escalabilidade então adicionar mais usuários, endpoints, etc. não trará muita experiência uma vez que é "Mais do mesmo" ou seja, repetição. Se estruturei minha API Bem, vai continuar bem, e vice-versa.
+Em relação aos Proximos passos, com excessão da implementação do Swagger, construí esse projeto habilitando escalabilidade então adicionar mais usuários, endpoints, etc. não trará muita experiência, seria "a repetição leva a perfeição". Se estruturei minha API Bem, vai continuar bem, e vice-versa.
 
 
