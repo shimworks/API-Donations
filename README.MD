@@ -83,7 +83,7 @@ localhost:3001/signup
   "password": "seenhaJane"
 }
 ```
-![singup](/global/Pics/01-singup.png)
+![singup](/Global/Pics/01-singup.png)
 
 POST - Login
 ```
@@ -95,7 +95,7 @@ localhost:3001/login
   "password": "seenhaJane"
 }
 ```
-![login](/global/Pics/02-login.png)
+![login](/Global/Pics/02-login.png)
 
 POST - Criar doação
 ```
@@ -106,8 +106,8 @@ localhost:3001/donation // precisa utilizar o Token para fazer esta reequisiçã
   "value": 1871
 }
 ```
-![usingToken](/global/Pics/03_1-postDonation.png)
-![creatingDonation](/global/Pics/03_2-postDonation.png)
+![usingToken](/Global/Pics/03_1-postDonation.png)
+![creatingDonation](/Global/Pics/03_2-postDonation.png)
 
 GET - Ver doação
 ```
