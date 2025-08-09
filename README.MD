@@ -34,6 +34,7 @@ Uma API para usuários criarem contas e doarem qualquer valor, os Doadores(usuá
 `touch .env`
 **MYSQL_USER não pode ser "root"**
 * Para iniciar os containers do Docker execute o comando `npm run du`
+* **Aguarde ~30sec** até a API inicializar
 * Agora é só começar a executar as requisições
 
 ### Comandos úteis
@@ -71,7 +72,7 @@ Ao criar conta os dados sensíveis são criptografados e então salvos no bando 
 ### Rotas
 
 POST - Criar Conta 
-```json
+```
 localhost:3001/signup
 ```
 ```json
@@ -85,7 +86,7 @@ localhost:3001/signup
 ![singup](/global/Pics/01-singup.png)
 
 POST - Login
-```json
+```
 localhost:3001/login
 ```
 ```json
@@ -97,7 +98,7 @@ localhost:3001/login
 ![login](/global/Pics/02-login.png)
 
 POST - Criar doação
-```json
+```
 localhost:3001/donation // precisa utilizar o Token para fazer esta reequisição
 ```
 ```json
@@ -109,13 +110,13 @@ localhost:3001/donation // precisa utilizar o Token para fazer esta reequisiçã
 ![creatingDonation](/global/Pics/03_2-postDonation.png)
 
 GET - Ver doação
-```json
+```
 localhost:3001/donation // precisa utilizar o Token para fazer esta reequisição
 ```
 ![getDonation](/Global/Pics/04-getDonation.png)
 
 PUT - Atualizar Doação
-```json
+```
 localhost:3001/donation/1 // precisa utilizar o Token para fazer esta reequisição
 ```
 ```json
@@ -126,7 +127,7 @@ localhost:3001/donation/1 // precisa utilizar o Token para fazer esta reequisiç
 ![putDonation](/Global/Pics/05-putDonation.png)
 
 DELETE - Deletar Doação
-```json
+```
  localhost:3001/donation/1 // precisa utilizar o Token para fazer esta reequisição
 ```
 ![deleteDonation](/Global/Pics/06-deleteDonation.png)
