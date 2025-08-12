@@ -1,28 +1,28 @@
-# Objetivo do projeto
+# Project Goal
 
-Este projeto foi criado com o objetivo de aprofundar meu conhecimento no desenvolvimento de uma API REST, com TDD(Test Driven Development) e estrutura MSC(Model Service Controller), demonstrar domínio de todas as tecnologias utilizadas(Sessão de tecnologias) como Express.js, Sequelize e Docker, também atento a segurança dos dados sensíveis através de Hash JWT(Json Web Token) e Criptografia BCrypt.
-Sei que há varios pontos de melhoria e estou aberto a feedbacks.
+This project was created with the goal of deepening my knowledge in developing a REST API using TDD (Test Driven Development) and the MSC (Model-Service-Controller) architecture. It demonstrates proficiency in all the technologies used (listed in the Technologies section), such as Express.js, Sequelize, and Docker, while also ensuring the security of sensitive data through JWT (JSON Web Token) hashing and BCrypt encryption.
+I am aware there are several areas for improvement, and I am open to feedback.
 
 
-# Sobre o projeto
+# About the project
 
-Uma API para usuários criarem contas e doarem qualquer valor, os Doadores(usuários) podem ver, alterar e deletar somente suas próprias doações.
+An API that allows users to create accounts and make donations of any amount. Donors (users) can view, update, and delete only their own donations.
 
 ---
-# Sumário
+# Sumary
 
-- [Instalação](#Instalação)
-- [Comandos úteis](#comandos-úteis)
-- [Fluxo](#fluxo)
-- [Rotas](#rotas)
-- [Tecnologias](#tecnologias)
-- [Paradigmas](#Paradigmas)
-- [Testes](#Testes)
-- [Próximos Passos?](#próximos-passos)
-- [Minha Visão](#minha-visão)
+- [Install](#install)
+- [Usefull Comands](#usefull-comands)
+- [Flow](#flow)
+- [Routes](#routes)
+- [Technologies](#technologies)
+- [Development Paradigms](#development-paradigms)
+- [Tests](#tests)
+- [Next steps?](#next-steps)
+- [My Vision](#my-vision)
 ---
 
-## Instalação
+## Install
 
 * Após a clonagem do repositório com o comando
 `git clone https://github.com/shimworks/API-Donations.git`.
@@ -37,7 +37,7 @@ Uma API para usuários criarem contas e doarem qualquer valor, os Doadores(usuá
 * **Aguarde ~30sec** até a API inicializar
 * Agora é só começar a executar as requisições
 
-### Comandos úteis
+### Usefull Comands
 
 - Derruba os containers Docker 
   `npm run dd`
@@ -63,13 +63,13 @@ Uma API para usuários criarem contas e doarem qualquer valor, os Doadores(usuá
   `SELECT * FROM Donors;`
   `SELECT * FROM Donations;`
 ---
-## Fluxo
+## Flow
 
 `Criar conta => Login => Criar doação => Ver/Atualizar/Deletar Doação`
 Ao criar conta os dados sensíveis são criptografados e então salvos no bando de dados MySQL, fazendo login utiliza a senha e o email da requisição e compara com os dados descriptografados do banco de dados, utilizando alguns dados do usuário é criado o token, para facilitar a navegação e evitar requisições extras ao banco de dados, com o token em "mãos" o usuário consegue fazer as requisições relacionadas as doações, mas somente sobre as doações que tem posse.
 
 
-### Rotas
+### Routes
 
 POST - Criar Conta 
 ```
@@ -132,7 +132,7 @@ DELETE - Deletar Doação
 ```
 ![deleteDonation](/Global/Pics/06-deleteDonation.png)
 
-# Tecnologias
+# Technologies
 - JavaScript
 - Node.js
 - Nodemon
@@ -148,12 +148,12 @@ DELETE - Deletar Doação
 - camelize
 - snakelize
 
-# Paradigmas
+# Development Paradigms
 - REST
 - MSC (Model Services Controller)
 - TDD (Test Driven Development)
 
-# Testes
+# Tests
 - mocha
 - chai
 - chai-http
@@ -161,14 +161,14 @@ DELETE - Deletar Doação
 
 ---
 
-# Próximos Passos?
+# Next steps?
 
 [ ] Implementar Swagger  
 [ ] Adicionar Endpoint para atualizar cadastro do Doador  
 [ ] Adicionar cadastro de ADMIN  
 [ ] Adicionar endopints para ADMIN (Gerenciar Doadores, Doações e ADMIN)  
 
-### Minha Visão 
+### My Vision 
 Em relação aos Proximos passos, com excessão da implementação do Swagger, construí esse projeto habilitando escalabilidade então adicionar mais usuários, endpoints, etc. não trará muita experiência, seria "a repetição leva a perfeição". Se estruturei minha API Bem, vai continuar bem, e vice-versa.
 
 
